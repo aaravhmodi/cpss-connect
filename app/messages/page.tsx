@@ -40,8 +40,8 @@ export default function MessagesPage() {
     
     const unsubscribe = onSnapshot(q, async (snapshot) => {
       const conversationsData = await Promise.all(
-        snapshot.docs.map(async (doc) => {
-          const data = { id: doc.id, ...doc.data() } as Conversation
+        snapshot.docs.map(async (convDoc) => {
+          const data = { id: convDoc.id, ...convDoc.data() } as Conversation
           const otherUserId = data.participantIds.find(id => id !== user.uid)
           let otherUser: User | undefined
 

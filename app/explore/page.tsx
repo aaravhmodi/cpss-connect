@@ -57,6 +57,7 @@ export default function ExplorePage() {
     const matchesRole = roleFilter === 'all' || user.role === roleFilter
     const matchesSearch = searchQuery === '' || 
       user.fullName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (user.username && user.username.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (user.university && user.university.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (user.program && user.program.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (user.jobTitle && user.jobTitle.toLowerCase().includes(searchQuery.toLowerCase())) ||
@@ -95,7 +96,7 @@ export default function ExplorePage() {
             </div>
             <input
               type="text"
-              placeholder="Search by name, program, or university..."
+              placeholder="Search by username, name, program, or university..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-12 pr-4 py-4 text-base md:text-lg border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"

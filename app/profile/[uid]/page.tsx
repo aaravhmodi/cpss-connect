@@ -59,16 +59,16 @@ export default function UserProfilePage() {
     )
     const conversationsSnapshot = await getDocs(conversationsQuery)
     
-    let existingConversation: Conversation | null = null
-    conversationsSnapshot.forEach((doc) => {
-      const data = { id: doc.id, ...doc.data() } as Conversation
+    let existingConversationId: string | null = null
+    conversationsSnapshot.forEach((convDoc) => {
+      const data = { id: convDoc.id, ...convDoc.data() } as Conversation
       if (data.participantIds.includes(profileUser.uid)) {
-        existingConversation = data
+        existingConversationId = data.id
       }
     })
 
-    if (existingConversation) {
-      router.push(`/messages/${existingConversation.id}`)
+    if (existingConversationId) {
+      router.push(`/messages/${existingConversationId}`)
     } else {
       // Create new conversation
       const { addDoc } = await import('firebase/firestore')

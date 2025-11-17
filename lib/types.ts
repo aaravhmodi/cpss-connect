@@ -5,8 +5,9 @@ export interface User {
   email: string
   role: UserRole
   fullName: string
-  username: string // Unique username
+  username?: string // Unique username
   bio?: string
+  suspended?: boolean // User suspension status
   createdAt: any
   updatedAt: any
   // Student fields
