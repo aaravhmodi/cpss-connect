@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { signInAnonymously } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { auth, db } from '@/firebase/config'
 import { useAuth } from '@/hooks/useAuth'
@@ -38,30 +39,31 @@ export default function AdminLoginPage() {
         return
       }
 
-      // Check if user is logged in
-      if (!user) {
-        setError('Please log in with your regular account first, then return here and enter the access code.')
-        setIsLoading(false)
-        return
+      // Sign in anonymously if not already logged in
+      let currentUser = user
+      if (!currentUser) {
+        const userCredential = await signInAnonymously(auth)
+        currentUser = userCredential.user
       }
 
       // Check if user exists in Firestore
-      const userDoc = await getDoc(doc(db, 'users', user.uid))
+      const userDoc = await getDoc(doc(db, 'users', currentUser.uid))
       
       if (!userDoc.exists()) {
         // Create admin user document
-        await setDoc(doc(db, 'users', user.uid), {
-          uid: user.uid,
-          email: user.email,
+        await setDoc(doc(db, 'users', currentUser.uid), {
+          uid: currentUser.uid,
+          email: currentUser.email || 'admin@cpssconnect.com',
           role: 'admin',
           fullName: 'Ms Matei',
+          username: 'msmatei',
           createdAt: new Date(),
           updatedAt: new Date(),
         })
       } else {
         // Update existing user to admin role
         const currentUserData = userDoc.data()
-        await setDoc(doc(db, 'users', user.uid), {
+        await setDoc(doc(db, 'users', currentUser.uid), {
           ...currentUserData,
           role: 'admin',
           fullName: 'Ms Matei',
@@ -69,10 +71,13 @@ export default function AdminLoginPage() {
         }, { merge: true })
       }
 
-      router.push('/admin')
+      // Wait a moment for the auth state to update
+      setTimeout(() => {
+        router.push('/admin')
+      }, 500)
     } catch (err: any) {
+      console.error('Admin login error:', err)
       setError(err.message || 'Failed to authenticate as admin')
-    } finally {
       setIsLoading(false)
     }
   }
@@ -96,12 +101,6 @@ export default function AdminLoginPage() {
           )}
 
           <div className="space-y-4">
-            {!user && (
-              <div className="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-lg text-sm">
-                Please log in with your regular account first, then return here and enter the admin access code.
-              </div>
-            )}
-            
             <Input
               label="Admin Access Code"
               type="password"
@@ -110,6 +109,9 @@ export default function AdminLoginPage() {
               required
               placeholder="Enter admin code"
             />
+            <p className="text-sm text-gray-500 text-center">
+              Enter the admin access code to continue
+            </p>
           </div>
 
           <Button type="submit" isLoading={isLoading} className="w-full">
