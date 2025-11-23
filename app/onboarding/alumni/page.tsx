@@ -88,6 +88,22 @@ export default function AlumniOnboardingPage() {
         throw new Error('Profile was not created. Please try again.')
       }
       
+      // Send welcome email (don't wait for it - fire and forget)
+      try {
+        await fetch('/api/welcome-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: user.email,
+            name: formData.fullName,
+            role: 'alumni',
+          }),
+        })
+      } catch (emailError) {
+        // Silently fail - email is not critical
+        console.error('Failed to send welcome email:', emailError)
+      }
+      
       router.push('/home')
     } catch (err: any) {
       console.error('Error creating alumni profile:', err)

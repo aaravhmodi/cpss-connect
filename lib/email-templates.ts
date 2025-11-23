@@ -14,29 +14,49 @@ const baseWrapper = (content: string) => `
 export const templates = {
   welcome: (name: string, role: 'student' | 'alumni' | 'mentor') =>
     baseWrapper(`
-      <h1 style="margin:0;font-size:32px;font-weight:600;color:#1d1d1f;text-align:center;">
-        Welcome to CPSS Connect
-      </h1>
-      <p style="margin-top:24px;font-size:17px;line-height:1.6;color:#515154;">
-        Hi <strong>${name}</strong>,
+      <div style="text-align:center;margin-bottom:32px;">
+        <h1 style="margin:0;font-size:32px;font-weight:600;color:#1d1d1f;letter-spacing:-0.5px;">
+          Welcome to CPSS Connect
+        </h1>
+        <p style="margin-top:8px;font-size:16px;color:#86868b;font-weight:400;">
+          Your profile is ready!
+        </p>
+      </div>
+      
+      <p style="margin-top:0;font-size:17px;line-height:1.6;color:#1d1d1f;">
+        Hi <strong style="color:#1d1d1f;">${name}</strong>,
       </p>
-      <p style="font-size:17px;line-height:1.6;color:#515154;">
-        You're now part of a community where ${role === 'student'
-          ? 'current students can learn directly from alumni and mentors.'
+      
+      <p style="margin-top:20px;font-size:17px;line-height:1.6;color:#515154;">
+        ${role === 'student'
+          ? 'Welcome to CPSS Connect! You\'re now part of a private community where current students can connect directly with alumni, ask questions about pathways and programs, get honest advice, and learn from real experiences.'
           : role === 'alumni'
-          ? 'alumni can share real stories, honest advice, and support current students.'
-          : 'mentors can guide students with real-world experience and practical tips.'}
+          ? 'Welcome to CPSS Connect! You\'re now part of a community where alumni can support current students by sharing your experiences, answering questions about pathways and careers, and helping the next generation succeed.'
+          : 'Welcome to CPSS Connect! As a mentor, you can guide students with real-world experience, share practical advice, and help shape the future of CPSS students.'}
       </p>
-      <p style="font-size:17px;line-height:1.6;color:#515154;">
-        Start exploring conversations, sending messages, and building connections:
+      
+      <p style="margin-top:20px;font-size:17px;line-height:1.6;color:#515154;">
+        Here's what you can do now:
       </p>
+      
+      <ul style="margin-top:16px;margin-bottom:24px;padding-left:24px;font-size:17px;line-height:1.8;color:#515154;">
+        <li style="margin-bottom:8px;">${role === 'student' ? 'Browse alumni profiles and learn about different pathways' : 'Share your journey and help students discover opportunities'}</li>
+        <li style="margin-bottom:8px;">Connect with ${role === 'student' ? 'alumni and ask questions' : 'students and share advice'}</li>
+        <li style="margin-bottom:8px;">Build your network within the CPSS community</li>
+      </ul>
+      
       <div style="text-align:center;margin:40px 0;">
         <a href="https://cpss-connect.vercel.app"
-          style="background:#0071e3;padding:14px 28px;border-radius:12px;color:white;
-                 text-decoration:none;font-size:17px;font-weight:500;display:inline-block;">
-          Open CPSS Connect
+          style="background:#0071e3;padding:16px 32px;border-radius:12px;color:white;
+                 text-decoration:none;font-size:17px;font-weight:600;display:inline-block;
+                 box-shadow:0 4px 14px rgba(0,113,227,0.25);transition:all 0.2s;">
+          Get Started on CPSS Connect
         </a>
       </div>
+      
+      <p style="margin-top:32px;padding-top:24px;border-top:1px solid #e5e5e7;font-size:15px;line-height:1.6;color:#86868b;text-align:center;">
+        If you have any questions, feel free to reach out. We're here to help you make the most of your CPSS Connect experience.
+      </p>
     `),
 
   messageNotification: (toName: string, fromName: string, messagePreview: string) =>
