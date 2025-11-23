@@ -117,11 +117,11 @@ export default function UserProfilePage() {
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-6">
               <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary/10 flex items-center justify-center text-primary text-3xl md:text-4xl font-semibold">
-                {(profileUser.role === 'admin' ? 'Ms Matei' : profileUser.fullName).charAt(0).toUpperCase()}
+                {profileUser.fullName.charAt(0).toUpperCase()}
               </div>
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
-                  {profileUser.role === 'admin' ? 'Ms Matei' : profileUser.fullName}
+                  {profileUser.fullName}
                 </h1>
                 <RoleBadge role={profileUser.role} className="mt-3" />
               </div>

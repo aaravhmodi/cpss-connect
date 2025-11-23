@@ -108,7 +108,7 @@ export default function HomePage() {
     )
   }
 
-  const displayName = userData.role === 'admin' ? 'Ms Matei' : userData.fullName
+  const displayName = userData.fullName
 
   return (
     <div className="min-h-screen bg-white pt-14 md:pt-16">
@@ -187,11 +187,11 @@ export default function HomePage() {
           ) : (
             filteredPosts.map((post) => {
               const author = authorMap[post.authorId]
-              const authorName = post.authorId === user?.uid 
-                ? 'You' 
-                : (author?.role === 'admin' ? 'Ms Matei' : (author?.fullName || 'Unknown User'))
-              
-              const authorDisplayName = author?.role === 'admin' ? 'Ms Matei' : (author?.fullName || 'U')
+                      const authorName = post.authorId === user?.uid 
+                        ? 'You' 
+                        : (author?.fullName || 'Unknown User')
+                      
+                      const authorDisplayName = author?.fullName || 'U'
               
               return (
                 <div key={post.id} className="bg-white border-2 border-gray-200 rounded-2xl shadow-sm p-6 md:p-8 hover:shadow-md transition-shadow">
@@ -212,7 +212,7 @@ export default function HomePage() {
                         </p>
                       </div>
                     </div>
-                    {(post.authorId === user?.uid || userData.role === 'admin') && (
+                            {post.authorId === user?.uid && (
                       <button
                         onClick={() => handleDeletePost(post.id)}
                         className="text-red-500 hover:text-red-700 text-sm md:text-base font-medium px-3 py-2 rounded-lg hover:bg-red-50 transition-colors flex-shrink-0"

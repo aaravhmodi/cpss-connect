@@ -129,11 +129,11 @@ export default function ConversationPage() {
             <div className="flex items-center gap-4">
               <BackButton href="/messages" />
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xl font-semibold flex-shrink-0">
-                {(otherUser.role === 'admin' ? 'Ms Matei' : otherUser.fullName).charAt(0).toUpperCase()}
+                {otherUser.fullName.charAt(0).toUpperCase()}
               </div>
               <div className="flex-1 min-w-0">
                 <h2 className="font-bold text-lg text-gray-900 truncate">
-                  {otherUser.role === 'admin' ? 'Ms Matei' : otherUser.fullName}
+                  {otherUser.fullName}
                 </h2>
                 {otherUser.username && (
                   <p className="text-sm text-gray-500">@{otherUser.username}</p>

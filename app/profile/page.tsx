@@ -36,7 +36,7 @@ export default function ProfilePage() {
       router.push('/select-role')
     } else if (userData) {
       setFormData({
-    fullName: userData.role === 'admin' ? 'Ms Matei' : (userData.fullName || ''),
+    fullName: userData.fullName || '',
     bio: userData.bio || '',
     gradYear: userData.gradYear?.toString() || '',
     gradMonth: userData.gradMonth?.toString() || '',
@@ -60,13 +60,7 @@ export default function ProfilePage() {
         updatedAt: new Date(),
       }
 
-      // Admins always have the name "Ms Matei" - don't allow editing
-      if (userData.role !== 'admin') {
-        updateData.fullName = formData.fullName
-      } else {
-        // Ensure admin name is always "Ms Matei"
-        updateData.fullName = 'Ms Matei'
-      }
+      updateData.fullName = formData.fullName
 
       if (userData.role === 'student') {
         updateData.gradYear = parseInt(formData.gradYear)
@@ -110,10 +104,10 @@ export default function ProfilePage() {
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-6">
               <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary/10 flex items-center justify-center text-primary text-3xl md:text-4xl font-semibold">
-                {(userData.role === 'admin' ? 'Ms Matei' : userData.fullName).charAt(0).toUpperCase()}
+                {userData.fullName.charAt(0).toUpperCase()}
               </div>
               <div>
-                {isEditing && userData.role !== 'admin' ? (
+                {isEditing ? (
                   <Input
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
@@ -121,7 +115,7 @@ export default function ProfilePage() {
                   />
                 ) : (
                   <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
-                    {userData.role === 'admin' ? 'Ms Matei' : userData.fullName}
+                    {userData.fullName}
                   </h1>
                 )}
                 <RoleBadge role={userData.role} className="mt-3" />

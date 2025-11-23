@@ -4,14 +4,13 @@ A private social networking app for high school students and alumni, built with 
 
 ## Features
 
-- **Authentication**: Email/password login with Firebase Auth
-- **Role-based System**: Students, Alumni, and Admin roles
+- **Authentication**: Email/password login with Firebase Auth, Google Sign-in
+- **Role-based System**: Students and Alumni roles
 - **Auto-Graduation**: Students automatically convert to Alumni after graduation
 - **Home Feed**: View and create posts from all users
-- **Explore**: Browse and filter users by role
+- **Explore**: Browse and filter users by role and username
 - **Messaging**: One-to-one direct messaging
-- **Profiles**: View and edit user profiles
-- **Admin Dashboard**: User and post management for admins
+- **Profiles**: View and edit user profiles with unique usernames
 
 ## Tech Stack
 
@@ -52,10 +51,6 @@ FIREBASE_ADMIN_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour private key here\n
      - Enable **Google** provider (click Google, toggle Enable, and save)
    - Create a Firestore database
    - Deploy the security rules from `firestore.rules`
-   - Create an admin user:
-     - Sign up a user through the app (or sign in with existing account)
-     - Go to `/admin/login` and enter the access code: `Matei2025`
-     - The system will automatically grant admin privileges
 
 4. Run the development server:
 ```bash
@@ -79,17 +74,6 @@ See `firestore.rules` for the security rules configuration. Deploy them using:
 firebase deploy --only firestore:rules
 ```
 
-## Admin Setup
-
-To set up an admin account:
-
-1. Create a user account through the normal signup flow (or sign in with existing account)
-2. Go to `/admin/login`
-3. Enter the admin access code: `Matei2025`
-4. The system will automatically grant admin privileges to your account
-
-**Note:** The admin access code is hardcoded as `Matei2025` and cannot be changed without modifying the code.
-
 ## Project Structure
 
 ```
@@ -101,21 +85,17 @@ app/
 ├── home/               # Main feed with posts
 ├── explore/            # User directory
 ├── messages/           # Messaging interface
-├── profile/            # User profiles
-└── admin/              # Admin dashboard
+└── profile/            # User profiles
 components/             # Reusable UI components
 firebase/               # Firebase configuration
 hooks/                  # Custom React hooks
 lib/                    # Utilities and types
 ```
 
-## Features
-
-### User Roles
+## User Roles
 
 - **Student**: Current high school students with graduation date
-- **Alumni**: Graduated students with university/job info
-- **Admin**: Ms. Matei - can manage users and posts
+- **Alumni**: Graduated students with high school and university graduation years, university/job info
 
 ### Auto-Graduation
 
@@ -124,8 +104,7 @@ Students automatically convert to Alumni when the current date reaches their gra
 ### Key Features
 
 - Real-time post feed
-- User directory with search and filters
+- User directory with search and filters by role and username
 - One-to-one messaging
-- Profile management
-- Admin moderation tools
+- Profile management with unique usernames
 

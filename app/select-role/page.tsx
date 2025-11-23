@@ -58,14 +58,6 @@ export default function SelectRolePage() {
           </Button>
         </div>
 
-        <div className="text-center pt-4 border-t">
-          <p className="text-sm text-gray-500">
-            Admin?{' '}
-            <a href="/admin/login" className="text-primary hover:underline font-medium">
-              Click here to login
-            </a>
-          </p>
-        </div>
       </div>
     </div>
   )

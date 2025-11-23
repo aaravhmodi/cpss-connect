@@ -1,4 +1,4 @@
-export type UserRole = 'student' | 'alumni' | 'admin'
+export type UserRole = 'student' | 'alumni'
 
 export interface User {
   uid: string
@@ -20,7 +20,6 @@ export interface User {
   university?: string
   program?: string // University program/major
   jobTitle?: string // Current career/job title
-  // Admin fields (none specific)
 }
 
 export interface Post {

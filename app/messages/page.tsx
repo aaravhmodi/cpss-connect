@@ -108,9 +108,7 @@ export default function MessagesPage() {
           ) : (
             <div className="divide-y divide-gray-200">
               {conversations.map((conversation) => {
-                const otherUserName = conversation.otherUser?.role === 'admin' 
-                  ? 'Ms Matei' 
-                  : (conversation.otherUser?.fullName || 'Unknown User')
+                const otherUserName = conversation.otherUser?.fullName || 'Unknown User'
                 return (
                   <Link
                     key={conversation.id}

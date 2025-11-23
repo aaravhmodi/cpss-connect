@@ -50,7 +50,7 @@ export default function ExplorePage() {
 
   const filteredUsers = users.filter(user => {
     // Ensure role exists and is valid
-    if (!user.role || (user.role !== 'student' && user.role !== 'alumni' && user.role !== 'admin')) {
+    if (!user.role || (user.role !== 'student' && user.role !== 'alumni')) {
       return false
     }
     
@@ -141,7 +141,7 @@ export default function ExplorePage() {
             </div>
           ) : (
             filteredUsers.map((userItem) => {
-              const displayName = userItem.role === 'admin' ? 'Ms Matei' : userItem.fullName
+              const displayName = userItem.fullName
               return (
                 <Link
                   key={userItem.uid}
