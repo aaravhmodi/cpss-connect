@@ -1,4 +1,4 @@
-export type UserRole = 'student' | 'alumni'
+export type UserRole = 'student' | 'alumni' | 'teacher'
 
 export interface User {
   uid: string
@@ -20,6 +20,8 @@ export interface User {
   university?: string
   program?: string // University program/major
   jobTitle?: string // Current career/job title
+  // Teacher fields
+  subject?: string // What subject/class they teach
 }
 
 export interface Post {

@@ -20,7 +20,7 @@ export default function ExplorePage() {
   const { user, userData, loading } = useAuth()
   const router = useRouter()
   const [users, setUsers] = useState<User[]>([])
-  const [roleFilter, setRoleFilter] = useState<'all' | 'student' | 'alumni'>('all')
+  const [roleFilter, setRoleFilter] = useState<'all' | 'student' | 'alumni' | 'teacher'>('all')
   const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function ExplorePage() {
 
   const filteredUsers = users.filter(user => {
     // Ensure role exists and is valid
-    if (!user.role || (user.role !== 'student' && user.role !== 'alumni')) {
+    if (!user.role || (user.role !== 'student' && user.role !== 'alumni' && user.role !== 'teacher')) {
       return false
     }
     
@@ -61,6 +61,7 @@ export default function ExplorePage() {
       (user.university && user.university.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (user.program && user.program.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (user.jobTitle && user.jobTitle.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (user.subject && user.subject.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (user.interestedPrograms && user.interestedPrograms.some(p => 
         p.toLowerCase().includes(searchQuery.toLowerCase())
       ))
@@ -127,6 +128,14 @@ export default function ExplorePage() {
             >
               Alumni
             </button>
+            <button
+              onClick={() => setRoleFilter('teacher')}
+              className={`px-6 py-3 rounded-xl text-base font-medium transition-all ${
+                roleFilter === 'teacher' ? 'bg-primary text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 active:bg-gray-300'
+              }`}
+            >
+              Teachers
+            </button>
           </div>
         </div>
 
@@ -176,6 +185,12 @@ export default function ExplorePage() {
                       {userItem.university && <p><span className="font-medium">University:</span> {userItem.university}</p>}
                       {userItem.program && <p><span className="font-medium">Program:</span> {userItem.program}</p>}
                       {userItem.jobTitle && <p><span className="font-medium">Job:</span> {userItem.jobTitle}</p>}
+                    </div>
+                  )}
+                  
+                  {userItem.role === 'teacher' && (
+                    <div className="space-y-2 text-base text-gray-700">
+                      {userItem.subject && <p><span className="font-medium">Teaches:</span> {userItem.subject}</p>}
                     </div>
                   )}
                   

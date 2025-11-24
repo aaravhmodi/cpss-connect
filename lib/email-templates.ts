@@ -12,7 +12,7 @@ const baseWrapper = (content: string) => `
 `
 
 export const templates = {
-  welcome: (name: string, role: 'student' | 'alumni' | 'mentor') =>
+  welcome: (name: string, role: 'student' | 'alumni' | 'teacher') =>
     baseWrapper(`
       <div style="text-align:center;margin-bottom:32px;">
         <h1 style="margin:0;font-size:32px;font-weight:600;color:#1d1d1f;letter-spacing:-0.5px;">
@@ -29,10 +29,10 @@ export const templates = {
       
       <p style="margin-top:20px;font-size:17px;line-height:1.6;color:#515154;">
         ${role === 'student'
-          ? 'Welcome to CPSS Connect! You\'re now part of a private community where current students can connect directly with alumni, ask questions about pathways and programs, get honest advice, and learn from real experiences.'
+          ? "Welcome to CPSS Connect! You're now part of a private community where current students can connect directly with alumni, ask questions about pathways and programs, get honest advice, and learn from real experiences."
           : role === 'alumni'
-          ? 'Welcome to CPSS Connect! You\'re now part of a community where alumni can support current students by sharing your experiences, answering questions about pathways and careers, and helping the next generation succeed.'
-          : 'Welcome to CPSS Connect! As a mentor, you can guide students with real-world experience, share practical advice, and help shape the future of CPSS students.'}
+          ? "Welcome to CPSS Connect! You're now part of a community where alumni can support current students by sharing your experiences, answering questions about pathways and careers, and helping the next generation succeed."
+          : "Welcome to CPSS Connect! As a teacher, you can support students, connect with alumni, and help build a stronger CPSS community."}
       </p>
       
       <p style="margin-top:20px;font-size:17px;line-height:1.6;color:#515154;">
@@ -40,8 +40,8 @@ export const templates = {
       </p>
       
       <ul style="margin-top:16px;margin-bottom:24px;padding-left:24px;font-size:17px;line-height:1.8;color:#515154;">
-        <li style="margin-bottom:8px;">${role === 'student' ? 'Browse alumni profiles and learn about different pathways' : 'Share your journey and help students discover opportunities'}</li>
-        <li style="margin-bottom:8px;">Connect with ${role === 'student' ? 'alumni and ask questions' : 'students and share advice'}</li>
+        <li style="margin-bottom:8px;">${role === 'student' ? 'Browse alumni profiles and learn about different pathways' : role === 'alumni' ? 'Share your journey and help students discover opportunities' : 'Connect with students and alumni in your subject area'}</li>
+        <li style="margin-bottom:8px;">${role === 'student' ? 'Connect with alumni and ask questions' : role === 'alumni' ? 'Connect with students and share advice' : 'Support students with guidance and mentorship'}</li>
         <li style="margin-bottom:8px;">Build your network within the CPSS community</li>
       </ul>
       

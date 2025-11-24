@@ -56,6 +56,14 @@ export default function SelectRolePage() {
           >
             Alumni
           </Button>
+
+          <Button
+            variant="primary"
+            className="w-full py-4 text-lg"
+            onClick={() => router.push('/onboarding/teacher')}
+          >
+            Teacher
+          </Button>
         </div>
 
       </div>

@@ -193,6 +193,17 @@ export default function UserProfilePage() {
               </>
             )}
 
+            {profileUser.role === 'teacher' && (
+              <>
+                {profileUser.subject && (
+                  <div className="p-4 bg-gray-50 rounded-xl">
+                    <h3 className="text-base font-semibold text-gray-700 mb-1">Subject / Class</h3>
+                    <p className="text-lg md:text-xl font-bold text-gray-900">{profileUser.subject}</p>
+                  </div>
+                )}
+              </>
+            )}
+
             {profileUser.bio && (
               <div className="p-4 bg-gray-50 rounded-xl">
                 <h3 className="text-base font-semibold text-gray-700 mb-3">Bio</h3>

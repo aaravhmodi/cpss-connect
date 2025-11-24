@@ -9,11 +9,13 @@ export default function RoleBadge({ role, className = '' }: RoleBadgeProps) {
   const styles = {
     student: 'bg-blue-100 text-blue-800',
     alumni: 'bg-green-100 text-green-800',
+    teacher: 'bg-purple-100 text-purple-800',
   }
 
   const labels = {
     student: 'Student',
     alumni: 'Alumni',
+    teacher: 'Teacher',
   }
 
   return (

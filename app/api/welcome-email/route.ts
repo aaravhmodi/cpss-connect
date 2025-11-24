@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Email and name are required' }, { status: 400 })
   }
 
-  if (!role || (role !== 'student' && role !== 'alumni')) {
+  if (!role || (role !== 'student' && role !== 'alumni' && role !== 'teacher')) {
     return NextResponse.json({ error: 'Valid role is required' }, { status: 400 })
   }
 
