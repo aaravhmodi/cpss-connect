@@ -14,12 +14,12 @@ export default function Button({
   disabled,
   ...props 
 }: ButtonProps) {
-  const baseStyles = 'px-6 py-3 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed'
+  const baseStyles = 'px-6 py-3 rounded-apple font-medium disabled:opacity-50 disabled:cursor-not-allowed'
   
   const variants = {
-    primary: 'bg-primary text-white hover:bg-primary-dark shadow-sm hover:shadow-md',
-    secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
-    outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white',
+    primary: 'bg-cpss-green text-white hover:bg-primary-dark shadow-apple hover:shadow-apple-lg transition-all duration-200',
+    secondary: 'bg-cpss-green/80 text-white hover:bg-cpss-green shadow-apple hover:shadow-apple-lg transition-all duration-200',
+    outline: 'border-2 border-cpss-green text-cpss-green bg-white hover:bg-cpss-green hover:text-white transition-all duration-200',
   }
 
   return (

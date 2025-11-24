@@ -59,12 +59,20 @@ export default function Navigation() {
   }
 
   return (
-    <nav className="bg-white border-b border-gray-200 fixed top-0 left-0 right-0 shadow-sm z-50">
+    <nav className="bg-dark-bg border-b border-dark-border fixed top-0 left-0 right-0 shadow-apple z-50">
       <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6">
         <div className="flex items-center justify-between h-14 md:h-16">
           {/* Logo/Brand */}
-          <Link href="/home" className="flex items-center flex-shrink-0">
-            <span className="text-lg sm:text-xl md:text-2xl font-bold text-primary">CPSS Connect</span>
+          <Link href="/home" className="flex items-center gap-2 flex-shrink-0">
+            <img 
+              src="/cpss.jpg" 
+              alt="CPSS" 
+              className="w-8 h-8 rounded-apple object-cover"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = 'none'
+              }}
+            />
+            <span className="text-lg sm:text-xl md:text-2xl font-bold text-cpss-green">CPSS Connect</span>
           </Link>
 
           {/* Navigation Items */}
@@ -73,20 +81,20 @@ export default function Navigation() {
               <Link
                 key={item.path}
                 href={item.path}
-                className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-lg transition-colors flex-shrink-0 ${
+                className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-apple transition-all duration-200 flex-shrink-0 ${
                   isActive(item.path)
-                    ? 'text-primary bg-primary/10 font-semibold'
-                    : 'text-gray-600 hover:text-primary hover:bg-gray-50'
+                    ? 'text-cpss-green bg-cpss-green/20 font-semibold'
+                    : 'text-dark-text-secondary hover:text-cpss-green hover:bg-dark-bg-secondary'
                 }`}
                 title={item.label}
               >
-                <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                <item.icon className={`w-4 h-4 sm:w-5 sm:h-5 ${isActive(item.path) ? 'text-cpss-green' : 'text-dark-text-secondary'}`} />
                 <span className="hidden sm:inline text-xs sm:text-sm md:text-base font-medium">{item.label}</span>
               </Link>
             ))}
             <button
               onClick={handleSignOut}
-              className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-lg text-red-600 hover:bg-red-50 transition-colors flex-shrink-0"
+              className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-apple text-red-400 hover:bg-red-900/20 transition-all duration-200 flex-shrink-0"
               title="Sign Out"
             >
               <SignOutIcon className="w-4 h-4 sm:w-5 sm:h-5" />

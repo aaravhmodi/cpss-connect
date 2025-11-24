@@ -7,6 +7,7 @@ import { collection, query, where, orderBy, onSnapshot, doc, getDoc } from 'fire
 import { db } from '@/firebase/config'
 import { Conversation, User } from '@/lib/types'
 import Navigation from '@/components/Navigation'
+import RoleBadge from '@/components/RoleBadge'
 import { formatTimestamp } from '@/lib/utils'
 import Link from 'next/link'
 
@@ -69,66 +70,78 @@ export default function MessagesPage() {
 
   if (loading || !userData) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen bg-dark-bg">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cpss-green mx-auto"></div>
+          <p className="mt-4 text-dark-text-secondary">Loading...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-white pt-14 md:pt-16">
+    <div className="min-h-screen bg-dark-bg pt-14 md:pt-16">
+      
       <div className="max-w-5xl mx-auto px-4 md:px-6 py-6 md:py-8">
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-              <MessagesIcon className="w-7 h-7 text-primary" />
-            </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Messages</h1>
-          </div>
-          <Link
-            href="/explore"
-            className="px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary-dark transition-colors font-medium text-base shadow-md hover:shadow-lg"
-          >
-            New Message
-          </Link>
+        <div className="mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-dark-text mb-2">Messages</h1>
+          <p className="text-lg md:text-xl text-dark-text-secondary">Stay connected with your community</p>
         </div>
 
-        <div className="bg-white border-2 border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        {/* Search Bar */}
+        <div className="mb-6">
+          <div className="relative">
+            <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
+              <svg className="w-6 h-6 text-dark-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <input
+              type="text"
+              placeholder="Search conversations..."
+              className="w-full pl-12 pr-4 py-4 text-base md:text-lg border border-dark-border rounded-apple-xl bg-dark-bg-secondary text-dark-text focus:outline-none focus:ring-2 focus:ring-cpss-green focus:border-cpss-green placeholder-dark-text-muted"
+            />
+          </div>
+        </div>
+
+        <div className="bg-dark-bg-card border border-dark-border rounded-apple-lg shadow-apple overflow-hidden">
           {conversations.length === 0 ? (
             <div className="p-12 md:p-16 text-center">
-              <MessagesIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <p className="text-lg md:text-xl text-gray-500 mb-4">No conversations yet.</p>
-              <Link href="/explore" className="text-primary hover:underline font-medium text-base">
+              <MessagesIcon className="w-16 h-16 text-dark-text-muted mx-auto mb-4" />
+              <p className="text-lg md:text-xl text-dark-text-muted mb-4">No conversations yet.</p>
+              <Link href="/explore" className="text-cpss-green hover:underline font-medium text-base">
                 Start a conversation
               </Link>
             </div>
           ) : (
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-dark-border">
               {conversations.map((conversation) => {
                 const otherUserName = conversation.otherUser?.fullName || 'Unknown User'
                 return (
                   <Link
                     key={conversation.id}
                     href={`/messages/${conversation.id}`}
-                    className="block p-6 md:p-8 hover:bg-gray-50 active:bg-gray-100 transition-colors"
+                    className="block p-6 md:p-8 hover:bg-dark-bg-secondary active:bg-dark-border transition-colors"
                   >
                     <div className="flex items-center gap-4 md:gap-6">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary/10 flex items-center justify-center text-primary text-2xl md:text-3xl font-semibold flex-shrink-0">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-cpss-green/20 flex items-center justify-center text-cpss-green text-2xl md:text-3xl font-semibold flex-shrink-0">
                         {otherUserName.charAt(0).toUpperCase()}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-bold text-lg md:text-xl text-gray-900 truncate mb-1">
-                          {otherUserName}
-                        </h3>
-                        <p className="text-base md:text-lg text-gray-600 truncate">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="font-bold text-lg md:text-xl text-dark-text truncate">
+                            {otherUserName}
+                          </h3>
+                          {conversation.otherUser && (
+                            <RoleBadge role={conversation.otherUser.role} />
+                          )}
+                        </div>
+                        <p className="text-base md:text-lg text-dark-text-secondary truncate">
                           {conversation.lastMessage || 'No messages yet'}
                         </p>
                       </div>
                       {conversation.lastMessageAt && (
-                        <div className="text-sm text-gray-400 flex-shrink-0">
+                        <div className="text-sm text-dark-text-muted flex-shrink-0">
                           {formatTimestamp(conversation.lastMessageAt)}
                         </div>
                       )}

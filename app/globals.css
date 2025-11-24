@@ -3,19 +3,30 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
+  /* CPSS Color Variables */
+  --cpss-green: #2D8650;
+  --cpss-gold: #E8C547;
+  --cpss-black: #0D0D0D;
+  --cpss-white: #F8F8F8;
+  --cpss-grey: #E5E5E7;
+  
+  /* Dark Mode Colors */
+  --bg-primary: #0D0D0D;
+  --bg-secondary: #1A1A1A;
+  --bg-card: #1F1F1F;
+  --text-primary: #F8F8F8;
+  --text-secondary: #E5E5E7;
+  --text-muted: #A0A0A5;
+  --border-color: #2D2D2D;
+  
+  /* Apple-style gradients for dark mode */
+  --gradient-hero: linear-gradient(180deg, rgba(45, 134, 80, 0.15) 0%, #0D0D0D 60%);
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  font-family: var(--font-archivo), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 @layer utilities {

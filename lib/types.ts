@@ -7,6 +7,7 @@ export interface User {
   fullName: string
   username?: string // Unique username
   bio?: string
+  linkedinUrl?: string // LinkedIn profile URL
   suspended?: boolean // User suspension status
   createdAt: any
   updatedAt: any

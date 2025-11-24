@@ -7,9 +7,9 @@ interface RoleBadgeProps {
 
 export default function RoleBadge({ role, className = '' }: RoleBadgeProps) {
   const styles = {
-    student: 'bg-blue-100 text-blue-800',
-    alumni: 'bg-green-100 text-green-800',
-    teacher: 'bg-purple-100 text-purple-800',
+    student: 'bg-cpss-green/20 text-cpss-green border border-cpss-green/30',
+    alumni: 'bg-cpss-gold/20 text-cpss-gold border border-cpss-gold/30',
+    teacher: 'bg-cpss-green/20 text-cpss-green border border-cpss-green/30',
   }
 
   const labels = {

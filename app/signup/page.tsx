@@ -60,19 +60,29 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-lg">
-        <div>
-          <h1 className="text-3xl font-bold text-center text-gray-900">Create Account</h1>
-          <p className="mt-2 text-center text-gray-600">Join CPSS Connect</p>
-          <p className="mt-2 text-center text-sm text-gray-500 italic">
+    <div className="min-h-screen flex items-center justify-center bg-dark-bg px-4" style={{ background: 'var(--gradient-hero)' }}>
+      <div className="max-w-md w-full space-y-8 bg-dark-bg-card p-8 rounded-apple-lg shadow-apple-lg border border-dark-border">
+        <div className="text-center">
+          <div className="mb-6 flex justify-center">
+            <img 
+              src="/cpss.jpg" 
+              alt="CPSS" 
+              className="w-30 h-30 rounded-apple-lg object-cover"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = 'none'
+              }}
+            />
+          </div>
+          <h1 className="text-3xl font-bold text-center text-dark-text">Create Account</h1>
+          <p className="mt-2 text-center text-cpss-green font-medium">Join CPSS Connect</p>
+          <p className="mt-4 text-center text-sm text-dark-text-muted italic">
             Please use your personal email address
           </p>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSignup}>
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-apple">
               {error}
             </div>
           )}
@@ -114,10 +124,10 @@ export default function SignupPage() {
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
+              <div className="w-full border-t border-dark-border"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Or continue with</span>
+              <span className="px-2 bg-dark-bg-card text-dark-text-muted">Or continue with</span>
             </div>
           </div>
 
@@ -150,9 +160,9 @@ export default function SignupPage() {
           </Button>
 
           <div className="text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-dark-text-secondary">
               Already have an account?{' '}
-              <Link href="/login" className="text-primary hover:underline font-medium">
+              <Link href="/login" className="text-cpss-green hover:underline font-medium">
                 Sign in
               </Link>
             </p>
